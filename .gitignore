@@ -33,3 +33,4 @@ design-assets/**/.grok/
 
 # playwright mcp snapshots
 .playwright-mcp/
+/.grok/rules/hindsight-session.md

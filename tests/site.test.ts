@@ -24,23 +24,54 @@ describe('production build', () => {
     expect(html).toContain('Your business is hiding profit.');
   });
 
-  it('home page has canonical, Open Graph, and Organization schema', () => {
-    const html = read('index.html');
-    expect(html).toContain('<link rel="canonical" href="https://bizmaxinc.com/">');
-    expect(html).toContain('property="og:image" content="https://bizmaxinc.com/og.png"');
-    expect(html).toContain('"@type":"Organization"');
-    expect(html).toContain('"postalCode":"33143"');
+  it('every page has canonical, Open Graph, and valid Organization schema', () => {
+    for (const [file, url] of [
+      ['index.html', 'https://bizmaxinc.com/'],
+      ['privacy.html', 'https://bizmaxinc.com/privacy'],
+      ['terms.html', 'https://bizmaxinc.com/terms'],
+    ]) {
+      const html = read(file);
+      expect(html, file).toContain(`<link rel="canonical" href="${url}">`);
+      expect(html, file).toContain(`property="og:url" content="${url}"`);
+      expect(html, file).toContain('property="og:image" content="https://bizmaxinc.com/og.png"');
+      expect(html, file).not.toContain('name="robots"');
+      const ld = html.match(/<script type="application\/ld\+json">(.*?)<\/script>/s);
+      expect(ld, `${file} JSON-LD`).not.toBeNull();
+      const org = JSON.parse(ld![1]);
+      expect(org['@type']).toBe('Organization');
+      expect(org.name).toBe('Business Maximization Inc');
+      expect(org.email).toBe('bill@bizmaxinc.com');
+      expect(org.address.postalCode).toBe('33143');
+    }
     expect(existsSync(join(client, 'og.png'))).toBe(true);
   });
 
-  it('every page has a main landmark and the 404 page stays out of the index', () => {
+  it('omits the Meta domain-verification tag until the code is configured', () => {
+    // PUBLIC_META_DOMAIN_VERIFICATION is unset in the test build.
+    expect(read('index.html')).not.toContain('facebook-domain-verification');
+  });
+
+  it('keeps header, main, and footer as sibling landmarks on every page', () => {
     for (const file of ['index.html', 'privacy.html', 'terms.html', '404.html']) {
-      expect(read(file), file).toContain('<main');
+      const html = read(file);
+      const main = html.match(/<main[\s>](.*?)<\/main>/s);
+      expect(main, `${file} main`).not.toBeNull();
+      expect(main![1], `${file}: footer inside main`).not.toContain('<footer');
+      expect(main![1], `${file}: header inside main`).not.toContain('<header');
+      expect(html.indexOf('<footer'), `${file}: footer after main`).toBeGreaterThan(html.indexOf('</main>'));
     }
+    for (const file of ['index.html', 'privacy.html', 'terms.html']) {
+      const html = read(file);
+      expect(html.indexOf('<header'), `${file}: header before main`).toBeLessThan(html.indexOf('<main'));
+    }
+  });
+
+  it('keeps the 404 page out of the index with no canonical or social tags', () => {
     const notFound = read('404.html');
     expect(notFound).toContain('<meta name="robots" content="noindex">');
     expect(notFound).not.toContain('rel="canonical"');
-    expect(notFound).not.toContain('property="og:url"');
+    expect(notFound).not.toContain('property="og:');
+    expect(notFound).not.toContain('name="twitter:');
   });
 
   it('legal pages disclose advertising data use and contact', () => {

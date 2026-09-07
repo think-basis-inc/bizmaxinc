@@ -6,7 +6,6 @@ import Pill from '../components/Pill.astro';
 import Tag from '../components/Tag.astro';
 import { Image } from 'astro:assets';
 import heroSculpture from '../assets/hero-sculpture.png';
-import heroSculptureMobile from '../assets/hero-sculpture-mobile.png';
 import sculpture from '../assets/sculpture.png';
 
 export const prerender = true;
@@ -34,9 +33,9 @@ const layers = ['Positioning', 'Reach', 'Offer', 'Funnel', 'Identity', 'Triggers
 ---
 
 <Layout path="/">
-  <main class="p-3">
-    <!-- Hero -->
-    <section id="top" class="relative flex flex-col overflow-hidden rounded-3xl bg-mint px-5 sm:rounded-[32px] sm:px-6">
+  <div class="p-3">
+    <!-- Hero: the page-level header carries the nav and the headline -->
+    <header id="top" class="relative flex flex-col overflow-hidden rounded-3xl bg-mint px-5 sm:rounded-[32px] sm:px-6">
       <SiteHeader />
 
       <div class="relative mx-auto flex max-w-[1100px] flex-col items-center gap-7 pt-14 text-center md:pt-[72px]">
@@ -61,23 +60,12 @@ const layers = ['Positioning', 'Reach', 'Offer', 'Funnel', 'Identity', 'Triggers
       <div class="rise relative -mx-5 -mt-6 [animation-delay:450ms] sm:-mx-6 md:-mt-16">
         <Image
           src={heroSculpture}
-          widths={[1024, 1440, 2048]}
+          widths={[768, 1024, 1440, 2048]}
           sizes="(min-width: 1440px) 1416px, 100vw"
           format="webp"
           quality={82}
           alt="A staircase of matte white slabs with a translucent green glass block glowing on the top step"
-          class="hidden h-auto w-full md:block"
-          loading="eager"
-          fetchpriority="high"
-        />
-        <Image
-          src={heroSculptureMobile}
-          widths={[480, 760, 1024]}
-          sizes="100vw"
-          format="webp"
-          quality={82}
-          alt="A staircase of matte white slabs with a translucent green glass block glowing on the top step"
-          class="h-auto w-full md:hidden"
+          class="h-auto w-full max-md:aspect-[1448/952] max-md:object-cover max-md:object-right"
           loading="eager"
           fetchpriority="high"
         />
@@ -98,8 +86,9 @@ const layers = ['Positioning', 'Reach', 'Offer', 'Funnel', 'Identity', 'Triggers
           <path d="M7 2v10m0 0 4-4m-4 4L3 8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path>
         </svg>
       </a>
-    </section>
+    </header>
 
+    <main>
     <!-- Statement -->
     <section class="px-4 pt-[72px] pb-[72px] sm:px-6 md:pt-[140px] md:pb-[120px]">
       <p
@@ -214,6 +203,8 @@ const layers = ['Positioning', 'Reach', 'Offer', 'Funnel', 'Identity', 'Triggers
       </div>
     </section>
 
+    </main>
+
     <SiteFooter />
-  </main>
+  </div>
 </Layout>
