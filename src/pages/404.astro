@@ -7,8 +7,8 @@ import Pill from '../components/Pill.astro';
 export const prerender = true;
 ---
 
-<Layout title="Page not found — Business Maximization Inc" description="That page does not exist." path="/404">
-  <div class="p-3">
+<Layout title="Page not found — Business Maximization Inc" description="That page does not exist." noindex>
+  <main class="p-3">
     <section class="flex min-h-[70vh] flex-col rounded-3xl bg-mint px-5 pb-14 sm:rounded-[32px] sm:px-6">
       <SiteHeader />
       <div class="flex flex-1 flex-col items-center justify-center gap-6 pt-14 text-center">
@@ -19,5 +19,5 @@ export const prerender = true;
       </div>
     </section>
     <SiteFooter />
-  </div>
+  </main>
 </Layout>

@@ -15,7 +15,7 @@ const { title, description, path, effective, updated } = Astro.props;
 ---
 
 <Layout title={`${title} — Business Maximization Inc`} description={description} path={path}>
-  <div class="p-3">
+  <main class="p-3">
     <div class="flex flex-col gap-16 rounded-3xl bg-mint px-5 pt-6 pb-14 sm:rounded-[32px] sm:px-9 md:pb-[72px]">
       <div class="flex items-center justify-between gap-6">
         <Logo />
@@ -38,5 +38,5 @@ const { title, description, path, effective, updated } = Astro.props;
       <slot />
     </article>
     <SiteFooter />
-  </div>
+  </main>
 </Layout>

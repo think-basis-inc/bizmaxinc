@@ -33,6 +33,16 @@ describe('production build', () => {
     expect(existsSync(join(client, 'og.png'))).toBe(true);
   });
 
+  it('every page has a main landmark and the 404 page stays out of the index', () => {
+    for (const file of ['index.html', 'privacy.html', 'terms.html', '404.html']) {
+      expect(read(file), file).toContain('<main');
+    }
+    const notFound = read('404.html');
+    expect(notFound).toContain('<meta name="robots" content="noindex">');
+    expect(notFound).not.toContain('rel="canonical"');
+    expect(notFound).not.toContain('property="og:url"');
+  });
+
   it('legal pages disclose advertising data use and contact', () => {
     const privacy = read('privacy.html');
     expect(privacy).toContain('Meta Pixel');

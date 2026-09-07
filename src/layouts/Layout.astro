@@ -6,6 +6,8 @@ interface Props {
   description?: string;
   /** Path of the page, used for the canonical URL. */
   path?: string;
+  /** Error and utility pages: no canonical, no Open Graph, and a noindex directive. */
+  noindex?: boolean;
 }
 
 const SITE_NAME = 'Business Maximization Inc';
@@ -15,6 +17,7 @@ const {
   title = `${SITE_NAME} — Your business is hiding profit.`,
   description = 'Your business is hiding profit. We find it and show you how to extract it. Business Maximization Inc builds diagnostic tools that find the gaps and hand owners a clear path forward.',
   path = '/',
+  noindex = false,
 } = Astro.props;
 
 const canonical = new URL(path, SITE_URL).href;
@@ -51,25 +54,31 @@ const organization = {
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{title}</title>
     <meta name="description" content={description} />
-    <link rel="canonical" href={canonical} />
+    {noindex ? <meta name="robots" content="noindex" /> : <link rel="canonical" href={canonical} />}
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="icon" type="image/x-icon" href="/favicon.ico" sizes="32x32" />
     <link rel="sitemap" href="/sitemap-index.xml" />
     <meta name="theme-color" content="#d2e1d6" />
     {metaDomainVerification && <meta name="facebook-domain-verification" content={metaDomainVerification} />}
 
-    <meta property="og:type" content="website" />
-    <meta property="og:site_name" content={SITE_NAME} />
-    <meta property="og:title" content={title} />
-    <meta property="og:description" content={description} />
-    <meta property="og:url" content={canonical} />
-    <meta property="og:image" content={ogImage} />
-    <meta property="og:image:width" content="1200" />
-    <meta property="og:image:height" content="630" />
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content={title} />
-    <meta name="twitter:description" content={description} />
-    <meta name="twitter:image" content={ogImage} />
+    {
+      !noindex && (
+        <>
+          <meta property="og:type" content="website" />
+          <meta property="og:site_name" content={SITE_NAME} />
+          <meta property="og:title" content={title} />
+          <meta property="og:description" content={description} />
+          <meta property="og:url" content={canonical} />
+          <meta property="og:image" content={ogImage} />
+          <meta property="og:image:width" content="1200" />
+          <meta property="og:image:height" content="630" />
+          <meta name="twitter:card" content="summary_large_image" />
+          <meta name="twitter:title" content={title} />
+          <meta name="twitter:description" content={description} />
+          <meta name="twitter:image" content={ogImage} />
+        </>
+      )
+    }
 
     <script type="application/ld+json" set:html={JSON.stringify(organization)} />
   </head>

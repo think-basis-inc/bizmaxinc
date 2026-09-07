@@ -18,7 +18,7 @@
     { "pattern": "www.bizmaxinc.com", "custom_domain": true }
   ],
   "vars": {
-    "PUBLIC_SITE_NAME": "Bizmax Inc.",
+    "PUBLIC_SITE_NAME": "Business Maximization Inc",
     "PUBLIC_SITE_URL": "https://bizmaxinc.com"
   }
 }
