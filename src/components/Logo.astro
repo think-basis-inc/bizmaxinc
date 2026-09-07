@@ -1,0 +1,23 @@
+---
+interface Props {
+  class?: string;
+}
+const { class: className = '' } = Astro.props;
+---
+
+<a
+  href="/"
+  class:list={['inline-flex items-center gap-2.5 text-xl font-extrabold tracking-[-0.02em] text-ink', className]}
+  aria-label="Business Maximization Inc home"
+>
+  <svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <rect x="1" y="1" width="28" height="28" rx="9" fill="currentColor"></rect>
+    <path
+      d="M9 21V9h7a3 3 0 0 1 0 6H9m7 0h1.5a3 3 0 0 1 0 6H9"
+      stroke="#ffffff"
+      stroke-width="2.2"
+      stroke-linecap="round"
+      stroke-linejoin="round"></path>
+  </svg>
+  Bizmax
+</a>

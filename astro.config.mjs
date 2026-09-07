@@ -10,6 +10,9 @@ export default defineConfig({
   output: 'server',
   trailingSlash: 'ignore',
   compressHTML: true,
+  build: {
+    format: 'file',
+  },
   adapter: cloudflare({
     imageService: 'compile',
   }),

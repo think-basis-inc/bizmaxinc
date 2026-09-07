@@ -1,13 +1,73 @@
 @import "tailwindcss";
+@import "@fontsource-variable/plus-jakarta-sans";
 
 @theme {
-  --font-sans: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-  --font-heading: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-sans: "Plus Jakarta Sans Variable", "Helvetica Neue", Helvetica, Arial, sans-serif;
 
-  --color-navy: #0b1c33;
-  --color-navy-dark: #071225;
-  --color-gold: #c9a227;
-  --color-gold-light: #e3c05f;
-  --color-off-white: #f8f7f4;
-  --color-gray: #6b7280;
+  --color-ink: #0d0f12;
+  --color-body: #3a3f46;
+  --color-muted: #5f656d;
+  --color-quiet: #8a9099;
+  --color-line: #e3e6ea;
+  --color-mint: #d2e1d6;
+  --color-mint-soft: #e4eee8;
+  --color-mint-deep: #c3d7ca;
+  --color-mint-line: #c9dacf;
+  --color-green: #1f8a5b;
+  --color-green-bright: #5ee2a0;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    -webkit-font-smoothing: antialiased;
+  }
+  ::selection {
+    background: var(--color-mint-deep);
+  }
+}
+
+@utility text-balance {
+  text-wrap: balance;
+}
+
+@utility text-pretty {
+  text-wrap: pretty;
+}
+
+@utility rise {
+  animation: rise 900ms cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+
+@utility drift {
+  animation: drift 14s ease-in-out infinite alternate;
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes drift {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(0, -28px, 0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rise,
+  .drift {
+    animation: none;
+  }
 }

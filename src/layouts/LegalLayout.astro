@@ -1,0 +1,42 @@
+---
+import Layout from './Layout.astro';
+import Logo from '../components/Logo.astro';
+import Tag from '../components/Tag.astro';
+import SiteFooter from '../components/SiteFooter.astro';
+
+interface Props {
+  title: string;
+  description: string;
+  path: string;
+  effective: string;
+  updated: string;
+}
+const { title, description, path, effective, updated } = Astro.props;
+---
+
+<Layout title={`${title} — Business Maximization Inc`} description={description} path={path}>
+  <div class="p-3">
+    <div class="flex flex-col gap-16 rounded-3xl bg-mint px-5 pt-6 pb-14 sm:rounded-[32px] sm:px-9 md:pb-[72px]">
+      <div class="flex items-center justify-between gap-6">
+        <Logo />
+        <a
+          href="/"
+          class="inline-flex h-11 items-center rounded-full bg-ink px-5 text-[15px] font-semibold text-white hover:bg-green"
+        >
+          Back to site
+        </a>
+      </div>
+      <div class="mx-auto flex w-full max-w-[760px] flex-col gap-4">
+        <Tag class="self-start">Legal</Tag>
+        <h1 class="text-[40px] leading-[1.02] font-extrabold tracking-[-0.04em] md:text-[64px]">{title}</h1>
+        <p class="text-[15px] font-semibold text-muted">Effective date: {effective} · Last updated: {updated}</p>
+      </div>
+    </div>
+    <article
+      class="prose-legal mx-auto w-full max-w-[760px] px-2 pt-14 pb-24 sm:px-6 [&_a]:text-green [&_a]:underline [&_a]:underline-offset-[3px] [&_a:hover]:text-ink [&_h2]:mt-11 [&_h2]:mb-3 [&_h2]:text-[28px] [&_h2]:leading-tight [&_h2]:font-bold [&_h2]:tracking-[-0.025em] [&_li]:mb-2 [&_li]:text-[17px] [&_li]:leading-[1.65] [&_li]:text-body [&_p]:mb-3.5 [&_p]:text-[17px] [&_p]:leading-[1.65] [&_p]:text-body [&_strong]:font-bold [&_strong]:text-ink [&_ul]:mb-3.5 [&_ul]:list-disc [&_ul]:pl-[22px]"
+    >
+      <slot />
+    </article>
+    <SiteFooter />
+  </div>
+</Layout>

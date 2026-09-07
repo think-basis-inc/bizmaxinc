@@ -1,20 +1,219 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import SiteHeader from '../components/SiteHeader.astro';
+import SiteFooter from '../components/SiteFooter.astro';
+import Pill from '../components/Pill.astro';
+import Tag from '../components/Tag.astro';
+import { Image } from 'astro:assets';
+import heroSculpture from '../assets/hero-sculpture.png';
+import heroSculptureMobile from '../assets/hero-sculpture-mobile.png';
+import sculpture from '../assets/sculpture.png';
+
+export const prerender = true;
+
+const whatWeDo = [
+  {
+    title: 'Find the blind spot',
+    body: 'Something in the business is quietly costing money, and everyone inside is so used to it that nobody sees it anymore.',
+  },
+  {
+    title: 'Catch the missed opportunity',
+    body: 'Demand that’s already there, going to someone else because nobody’s looking at it.',
+  },
+  {
+    title: 'Pull the growth lever',
+    body: 'The change that would actually move the numbers, sitting untouched because it never felt urgent.',
+  },
+  {
+    title: 'Hand you the path',
+    body: 'Clear, prioritized, and in plain language. Clarity first, growth second.',
+  },
+];
+
+const layers = ['Positioning', 'Reach', 'Offer', 'Funnel', 'Identity', 'Triggers'];
 ---
 
-<Layout>
-  <main class="flex min-h-screen flex-col items-center justify-center px-6 text-center">
-    <h1 class="text-5xl font-heading font-bold tracking-tight text-navy sm:text-7xl">
-      Bizmax Inc.
-    </h1>
-    <p class="mt-6 max-w-2xl text-lg text-gray sm:text-xl">
-      Parent company of
-      <a
-        href="https://discoverhiddenprofits.com"
-        class="text-gold underline decoration-1 underline-offset-4 transition-colors hover:text-gold-light"
+<Layout path="/">
+  <div class="p-3">
+    <!-- Hero -->
+    <section id="top" class="relative flex flex-col overflow-hidden rounded-3xl bg-mint px-5 sm:rounded-[32px] sm:px-6">
+      <SiteHeader />
+
+      <div class="relative mx-auto flex max-w-[1100px] flex-col items-center gap-7 pt-14 text-center md:pt-[72px]">
+        <Tag class="rise h-10 self-center bg-white/40 px-[18px] text-[15px]">Business Maximization Inc</Tag>
+        <h1
+          class="rise text-balance text-[46px] leading-[1.0] font-extrabold tracking-[-0.035em] [animation-delay:100ms] md:text-[96px] md:tracking-[-0.045em]"
+        >
+          <span class="text-muted">Your business is hiding profit.</span><br />We find it and show you how to extract it.
+        </h1>
+        <p
+          class="rise text-pretty max-w-[640px] text-lg leading-normal font-medium text-body [animation-delay:200ms] md:text-[22px]"
+        >
+          Most owners are too close to their own business to see what’s quietly costing them money. We build diagnostic
+          tools that find those gaps and hand you a clear path forward.
+        </p>
+        <div class="rise flex w-full flex-col items-stretch gap-3 pt-2 [animation-delay:300ms] sm:w-auto sm:flex-row sm:items-center">
+          <Pill href="https://discoverhiddenprofits.com">Find your hidden profit</Pill>
+          <Pill href="#what" variant="light">How it works</Pill>
+        </div>
+      </div>
+
+      <div class="rise relative -mx-5 -mt-6 [animation-delay:450ms] sm:-mx-6 md:-mt-16">
+        <Image
+          src={heroSculpture}
+          widths={[1024, 1440, 2048]}
+          sizes="(min-width: 1440px) 1416px, 100vw"
+          format="webp"
+          quality={82}
+          alt="A staircase of matte white slabs with a translucent green glass block glowing on the top step"
+          class="hidden h-auto w-full md:block"
+          loading="eager"
+          fetchpriority="high"
+        />
+        <Image
+          src={heroSculptureMobile}
+          widths={[480, 760, 1024]}
+          sizes="100vw"
+          format="webp"
+          quality={82}
+          alt="A staircase of matte white slabs with a translucent green glass block glowing on the top step"
+          class="h-auto w-full md:hidden"
+          loading="eager"
+          fetchpriority="high"
+        />
+      </div>
+
+      <div
+        class="rise absolute bottom-8 left-8 hidden items-center gap-3 text-[15px] font-semibold text-body [animation-delay:450ms] md:flex"
       >
-        Discover Hidden Profits
-      </a>.
-    </p>
-  </main>
+        <span class="inline-flex h-9 items-center rounded-full border border-mint-line bg-white px-3.5">Miami, FL</span>
+        <span>Diagnostic tools for business owners</span>
+      </div>
+      <a
+        href="#what"
+        class="rise absolute right-8 bottom-8 hidden h-10 items-center gap-2 rounded-full border border-mint-line bg-white px-[18px] text-[15px] font-semibold [animation-delay:450ms] hover:text-green md:inline-flex"
+      >
+        Scroll down
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <path d="M7 2v10m0 0 4-4m-4 4L3 8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path>
+        </svg>
+      </a>
+    </section>
+
+    <!-- Statement -->
+    <section class="px-4 pt-[72px] pb-[72px] sm:px-6 md:pt-[140px] md:pb-[120px]">
+      <p
+        class="text-pretty mx-auto max-w-[1280px] text-[27px] leading-[1.25] font-bold tracking-[-0.03em] md:text-[52px] md:leading-[1.15]"
+      >
+        <span class="text-quiet">Most business owners are too close to their own business to see what’s quietly costing them money.</span>
+        A blind spot. A missed opportunity. A growth lever nobody’s pulled.
+      </p>
+    </section>
+
+    <!-- What we do -->
+    <section id="what" class="scroll-mt-6 px-4 pb-[72px] sm:px-6 md:pb-[140px]">
+      <div class="mx-auto grid max-w-[1280px] grid-cols-1 gap-7 md:grid-cols-[5fr_7fr] md:gap-20">
+        <div class="flex flex-col gap-6 md:sticky md:top-10 md:self-start">
+          <Tag class="self-start">What we do</Tag>
+          <h2 class="text-balance text-[38px] leading-[1.02] font-extrabold tracking-[-0.04em] md:text-[64px]">
+            We build diagnostic tools that find the gaps.
+          </h2>
+          <p class="text-pretty text-lg leading-normal font-medium text-muted md:text-[22px]">
+            Not theory. Not a report you file away. A specific list of what’s off in your business, and what to do about it
+            first.
+          </p>
+        </div>
+        <ul class="flex flex-col">
+          {
+            whatWeDo.map((item) => (
+              <li class="grid grid-cols-1 gap-2 border-t border-line py-6 last:border-b md:grid-cols-[5fr_7fr] md:items-baseline md:gap-8 md:py-8">
+                <h3 class="text-[28px] font-bold tracking-[-0.02em]">{item.title}</h3>
+                <p class="text-pretty text-[19px] leading-normal font-medium text-muted">{item.body}</p>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+    </section>
+
+    <!-- Flagship -->
+    <section id="flagship" class="scroll-mt-6 px-4 pb-[72px] sm:px-6 md:pb-[140px]">
+      <div
+        class="relative mx-auto grid max-w-[1280px] grid-cols-1 gap-12 overflow-hidden rounded-3xl bg-mint px-6 py-8 md:rounded-[32px] md:px-[72px] md:py-20 lg:pr-[520px]"
+      >
+        <Image
+          src={sculpture}
+          widths={[640, 960]}
+          sizes="(min-width: 1024px) 560px, 0px"
+          format="webp"
+          quality={82}
+          alt=""
+          class="pointer-events-none absolute -top-10 -right-16 hidden w-[560px] max-w-none lg:block"
+          loading="lazy"
+        />
+        <div class="relative flex max-w-[760px] flex-col gap-6">
+          <Tag class="self-start">Flagship service</Tag>
+          <h2 class="text-balance text-[38px] leading-[1.02] font-extrabold tracking-[-0.04em] md:text-[64px]">Discover Hidden Profits</h2>
+          <p class="text-pretty text-lg leading-normal font-medium text-muted md:text-[22px]">
+            A structured framework designed to surface exactly what’s being missed in your marketing and what to do about
+            it. Six layers, examined personally, delivered as plain-language, priority-ordered fixes.
+          </p>
+          <div class="flex flex-col items-stretch gap-3 pt-2 sm:flex-row sm:items-center">
+            <Pill href="https://discoverhiddenprofits.com" arrow>See the Marketing Diagnostic</Pill>
+          </div>
+        </div>
+        <div class="relative flex max-w-[760px] flex-col gap-3.5">
+          <span class="text-sm font-semibold text-muted">The six layers</span>
+          <ul class="flex flex-wrap gap-2.5">
+            {
+              layers.map((layer) => (
+                <li class="inline-flex h-11 items-center rounded-full border border-mint-line bg-white px-5 text-base font-semibold">{layer}</li>
+              ))
+            }
+          </ul>
+          <p class="text-pretty mt-2 text-[17px] leading-normal font-medium text-muted">
+            The first in a growing set of tools and services built on the same premise.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Principle -->
+    <section class="px-4 pb-[72px] sm:px-6 md:pb-[140px]">
+      <p class="mx-auto flex max-w-[1280px] flex-col items-center gap-3 text-center text-[48px] leading-[1.0] font-extrabold tracking-[-0.045em] md:text-[96px]">
+        <span class="text-quiet">Clarity first.</span>
+        <span>Growth second.</span>
+      </p>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact" class="scroll-mt-6 px-4 pb-[72px] sm:px-6 md:pb-[120px]">
+      <div class="mx-auto grid max-w-[1280px] grid-cols-1 gap-7 md:grid-cols-[5fr_7fr] md:gap-20">
+        <div class="flex flex-col gap-6">
+          <Tag class="self-start">Contact</Tag>
+          <h2 class="text-balance text-[38px] leading-[1.02] font-extrabold tracking-[-0.04em] md:text-[64px]">
+            Think your business is hiding profit?
+          </h2>
+          <p class="text-pretty text-lg leading-normal font-medium text-muted md:text-[22px]">
+            It almost certainly is. Tell us what you run and we’ll point you at the right tool.
+          </p>
+        </div>
+        <div class="flex flex-col gap-8 md:pt-3">
+          <a
+            href="mailto:bill@bizmaxinc.com"
+            class="self-start text-[26px] leading-[1.1] font-bold tracking-[-0.03em] break-all hover:text-green md:text-[44px]"
+          >
+            bill@bizmaxinc.com
+          </a>
+          <address class="flex flex-col gap-1 text-[17px] leading-relaxed font-medium text-muted not-italic">
+            <span class="font-bold text-ink">Business Maximization Inc</span>
+            <span>6800 SW 65th Ave</span>
+            <span>Miami, FL 33143</span>
+          </address>
+        </div>
+      </div>
+    </section>
+
+    <SiteFooter />
+  </div>
 </Layout>

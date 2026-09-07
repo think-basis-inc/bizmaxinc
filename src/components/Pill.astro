@@ -1,0 +1,35 @@
+---
+/**
+ * Pill-shaped call to action. `variant="dark"` is the primary action,
+ * `variant="light"` the secondary.
+ */
+interface Props {
+  href: string;
+  variant?: 'dark' | 'light';
+  size?: 'md' | 'sm';
+  class?: string;
+  arrow?: boolean;
+}
+const { href, variant = 'dark', size = 'md', class: className = '', arrow = false } = Astro.props;
+const external = /^https?:\/\//.test(href);
+---
+
+<a
+  href={href}
+  rel={external ? 'noopener' : undefined}
+  class:list={[
+    'inline-flex items-center justify-center gap-2.5 rounded-full font-semibold whitespace-nowrap transition-[transform,background-color,color] duration-150 hover:-translate-y-px',
+    size === 'md' ? 'h-14 px-7 text-[17px]' : 'h-[52px] px-6 text-base',
+    variant === 'dark' ? 'bg-ink text-white hover:bg-green' : 'border border-line bg-white text-ink hover:bg-[#f2f4f6]',
+    className,
+  ]}
+>
+  <slot />
+  {
+    arrow && (
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <path d="M3 8h10m-4-4 4 4-4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+      </svg>
+    )
+  }
+</a>

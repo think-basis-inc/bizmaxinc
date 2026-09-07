@@ -27,3 +27,9 @@ worker-configuration.d.ts
 
 # jetbrains setting folder
 .idea/
+
+# grok session state
+design-assets/**/.grok/
+
+# playwright mcp snapshots
+.playwright-mcp/

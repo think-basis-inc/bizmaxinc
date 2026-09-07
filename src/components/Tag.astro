@@ -1,0 +1,16 @@
+---
+/** Small outlined pill label used as a section eyebrow. */
+interface Props {
+  class?: string;
+}
+const { class: className = '' } = Astro.props;
+---
+
+<span
+  class:list={[
+    'inline-flex h-9 items-center rounded-full border border-ink px-4 text-sm font-semibold',
+    className,
+  ]}
+>
+  <slot />
+</span>

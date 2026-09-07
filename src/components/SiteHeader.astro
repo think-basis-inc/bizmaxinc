@@ -1,0 +1,18 @@
+---
+import Logo from './Logo.astro';
+import Pill from './Pill.astro';
+---
+
+<div class="relative flex items-center justify-between gap-6 px-3 pt-6">
+  <Logo />
+  <nav class="flex items-center gap-7 text-[17px] font-semibold text-body" aria-label="Primary">
+    <a href="/#what" class="hidden hover:text-green md:inline">What we do</a>
+    <a href="/#flagship" class="hidden hover:text-green md:inline">Discover Hidden Profits</a>
+    <a href="/#contact" class="hidden hover:text-green md:inline">Contact</a>
+    <Pill href="https://discoverhiddenprofits.com" size="sm">
+      <span class="hidden size-2 rounded-full bg-green-bright sm:inline-block" aria-hidden="true"></span>
+      <span class="sm:hidden">Find hidden profit</span>
+      <span class="hidden sm:inline">Find your hidden profit</span>
+    </Pill>
+  </nav>
+</div>
