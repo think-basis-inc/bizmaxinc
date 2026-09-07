@@ -8,7 +8,7 @@ Corporate website for **Bizmax Inc.** — parent company of [Discover Hidden Pro
 
 ## Stack
 
-- Astro 7 with static output (on-demand routes can opt out with `export const prerender = false`)
+- Astro 7 with server output (`output: 'server'`); static pages opt in with `export const prerender = true`
 - Cloudflare Workers/Pages via `@astrojs/cloudflare`
 - Tailwind CSS 4 via `@tailwindcss/vite`
 - Wrangler CLI for deploys

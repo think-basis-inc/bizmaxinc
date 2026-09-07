@@ -7,14 +7,11 @@ import tailwindcss from '@tailwindcss/vite';
 // https://astro.build/config
 export default defineConfig({
   site: 'https://bizmaxinc.com',
-  output: 'static',
+  output: 'server',
   trailingSlash: 'ignore',
   compressHTML: true,
   adapter: cloudflare({
     imageService: 'compile',
-    platformProxy: {
-      enabled: true,
-    },
   }),
   integrations: [sitemap()],
   vite: {
