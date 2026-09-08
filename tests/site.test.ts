@@ -16,7 +16,7 @@ describe('production build', () => {
   it('home page carries the business identity Meta checks for', () => {
     const html = read('index.html');
     expect(html).toContain('Business Maximization Inc');
-    expect(html).toContain('6800 SW 65th Ave');
+    expect(html).toContain('8300 SW 65th Ave');
     expect(html).toContain('Miami, FL 33143');
     expect(html).toContain('mailto:bill@bizmaxinc.com');
     expect(html).toContain('href="/privacy"');
