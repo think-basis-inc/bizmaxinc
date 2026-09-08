@@ -24,6 +24,17 @@ describe('production build', () => {
     expect(html).toContain('Your business is hiding profit.');
   });
 
+  it('ensures hero CTA buttons are clickable and not obscured by the hero image', () => {
+    const html = read('index.html');
+    const heroContentMatch = html.match(/<header[^>]*id="top"[^>]*>[\s\S]*?<div class="([^"]*max-w-\[1100px\][^"]*)"/);
+    expect(heroContentMatch, 'hero content container').not.toBeNull();
+    expect(heroContentMatch![1]).toContain('z-10');
+
+    const heroImageMatch = html.match(/<div class="([^"]*\[animation-delay:450ms\][^"]*sm:-mx-6[^"]*)"/);
+    expect(heroImageMatch, 'hero image wrapper').not.toBeNull();
+    expect(heroImageMatch![1]).toContain('pointer-events-none');
+  });
+
   it('every page has canonical, Open Graph, and valid Organization schema', () => {
     for (const [file, url] of [
       ['index.html', 'https://bizmaxinc.com/'],
